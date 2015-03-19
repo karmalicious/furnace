@@ -1,0 +1,10 @@
+<% @schedules.each do |schedule| %>
+  <table border="1">
+    <tr>
+      <td><%= schedule.start %></td>
+      <td><%= schedule.stop %></td>
+      <td><%= schedule.title %></td>
+      <td><%= schedule.updated_at %></td>
+    </tr>
+  </table>
+<% end %>
