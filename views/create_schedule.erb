@@ -1,15 +1,50 @@
-<form action="/new" method="post">
-  Start:<br>
-  <input type="date" name="start" required>
-  <br>
-  Stop:<br>
-  <input type="date" name="stop" required>
-  <br>
-  Title:<br>
-  <input type="text" name="title" required>
-  <br>
-  Unit:<br>
-  <input type="text" name="unit" required>
-  <br>
-  <input type="submit">
-</form>
+<div class="container">
+  <form action="/new" method="post" role="form" >
+    <div class="form-group">
+      <label for="datetimepicker1">Start:</label>
+      <div class="row">
+        <div class='col-xs-8'>
+          <input type='text' class="form-control" id='datetimepicker1' name='start' required />
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="datetimepicker2">Stop:</label>
+      <div class="row">
+        <div class='col-xs-8'>
+          <input type='text' class="form-control" id='datetimepicker2' name='stop' required />
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      $(function () {
+        $('#datetimepicker1').datetimepicker({
+           sideBySide: true,
+           calendarWeeks: true,
+           locale: 'sv',
+        });
+        $('#datetimepicker2').datetimepicker({
+           sideBySide: true,
+           calendarWeeks: true,
+           locale: 'sv',
+        });
+      });
+    </script>
+    <div class="form-group">
+      <label for="Units">Stuga</label>
+      <div class="row">
+        <div class='col-xs-8'>
+          <select class="form-control" id="units" name="unit">
+            <% @units.each do |line| %>
+              <option><%= line.unit%></option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+    </div>
+    <input type="submit" class="btn btn-md btn-info" value="Spara">
+    <input action="action" type="button" class="btn btn-md btn-warning" value="Avbryt" onclick="history.go(-1);">
+  </form>
+</div>
+<script>
+

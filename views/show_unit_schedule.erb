@@ -1,22 +1,21 @@
 <div class="container">
-  <h2>Schemalagda Stugor</h2>
-  <p>Schemalagda tider f&ouml;r stugors p&aring;- och avslagning av el</p>
+  <h2><%= @title %></h2>
+  <p>Schemalagda tider f&ouml;r stugans p&aring;- och avslagning av el</p>
   <p>Klicka p&aring; ett schema f&ouml;r att redigera det. Klicka p&aring; ett stugnamn f&ouml;r att se stugans scheman</p>
-  <a href="/form" class="btn btn-info btn-md">L&auml;gg till schema</a>            
-  <table class="table table-striped">
+  <a href="/form" class="btn btn-info btn-md">L&auml;gg till schema</a>
+  <input action="action" type="button" class="btn btn-md btn-warning" value="Tillbaka" onclick="history.go(-1);">
+  <table class="table table-hover table-striped">
     <thead>
       <tr>
         <th>Schema Start</th>
         <th>Schema Stopp</th>
-        <th>Stuga</th>
       </tr>
     </thead>
     <tbody>
       <% @schedules.each do |schedule| %>
         <tr class='clickable-row' data-href='/schedules/<%= schedule.id %>/<%= schedule.unit_id %>'>
-          <td><%= schedule.start.strftime("%Y-%m-%d %H:%M") %></td>
+          <td><%= schedule.start.strftime("%Y-%m-%d %H:%M") %></a></td>
           <td><%= schedule.stop.strftime("%Y-%m-%d %H:%M") %></td>
-          <td><a href="/unit/<%= schedule.unit.id %>"><%= schedule.unit.unit %></a></td>
         </tr>
       <% end %>
     </tbody>
@@ -29,4 +28,3 @@ jQuery(document).ready(function($) {
     });
 });
 </script>
-

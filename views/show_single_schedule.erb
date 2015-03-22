@@ -1,0 +1,22 @@
+<div class="container">
+  <h2>Redigera Schema <%= @unit.unit.capitalize %></h2>
+  <p>Schemalagda tider f&ouml;r stugans p&aring;- och avslagning av el</p>
+  <a href="/form/<%= @schedules.start %>/<%= @schedules.stop %>/<%= @schedules.unit_id %>" class="btn btn-info btn-md">Redigera schema</a>            
+  <a href="/delete/schedules/<%= @schedules.id %>" class="btn btn-danger btn-md">Radera schema</a>            
+  <input action="action" type="button" class="btn btn-md btn-warning" value="Tillbaka" onclick="history.go(-1);">
+  <table class="table table">
+    <thead>
+      <tr>
+        <th>Schema Start</th>
+        <th>Schema Stopp</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><%= @schedules.start.strftime("%Y-%m-%d %H:%M") %></td>
+          <td><%= @schedules.stop.strftime("%Y-%m-%d %H:%M") %></td>
+        </tr>
+    </tbody>
+  </table>
+</div>
+
