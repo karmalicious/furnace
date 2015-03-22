@@ -1,9 +1,11 @@
+# encoding: utf-8
 get '/' do
-  @schedules = Schedule.all
+  @schedules = Unit.all.schedules.all(:order => [ :unit_id.asc, :start.asc ])
   erb :show_schedules
 end
 
 get '/form' do
+  @units = Unit.all
   erb :create_schedule
 end
 
@@ -15,6 +17,25 @@ post '/new' do
     :updated_at	=> DateTime.now
   )
   redirect '/'
+end
+
+get '/schedules/:id/:unit' do
+  @schedules = Schedule.get(params[:id])
+  @unit = Unit.get(params[:unit])
+  erb :show_single_schedule
+end
+
+get '/delete/schedules/:id' do
+  @schedules = Schedule.get(params[:id])
+  erb :delete_confirm
+end
+
+get '/delete/schedules/:id/:confirmed/:unit_id' do
+  schedule = Schedule.get(params[:id])
+  if params[:confirmed] = "ConfirmedDelete"
+    schedule.destroy
+  end
+  redirect "/unit/#{params[:unit_id]}"
 end
 
 get '/api/schedules' do
