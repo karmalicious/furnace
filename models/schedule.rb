@@ -1,9 +1,7 @@
 class Unit
   include DataMapper::Resource
 
-  has n, :schedules
-  has n, :relays
-  has n, :temps
+  has n, :rooms
 
   property :id,         Serial
   property :unit,       String
@@ -12,10 +10,23 @@ class Unit
   property :version,    String
 end
 
+class Room
+  include DataMapper::Resource
+
+  belongs_to :unit
+
+  has 1, :relay
+  has 1, :temp
+  has n, :schedules
+  
+  property :id,         Serial
+  property :room,       String
+end
+
 class Schedule
   include DataMapper::Resource
   
-  belongs_to :unit
+  has n, :rooms 	
 
   property :id,         Serial
   property :title,      String
@@ -27,10 +38,9 @@ end
 class Relay
   include DataMapper::Resource
 
-  belongs_to :unit
+  belongs_to :room
 
   property :id,         	Serial
-  property :room,		String
   property :relay_status,	String
   property :updated_at, 	DateTime
 end
@@ -38,10 +48,9 @@ end
 class Temp
   include DataMapper::Resource
 
-  belongs_to :unit
+  belongs_to :room
 
   property :id,         Serial
-  property :room,	Integer
   property :temp,	Float
   property :updated_at, DateTime
 end

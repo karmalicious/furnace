@@ -75,5 +75,6 @@ DEPENDENCIES
   data_mapper
   dm-migrations
   dm-mysql-adapter
+  do_mysql
   json
   sinatra

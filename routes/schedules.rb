@@ -19,12 +19,6 @@ post '/new' do
   redirect '/'
 end
 
-get '/schedules/:id/:unit' do
-  @schedules = Schedule.get(params[:id])
-  @unit = Unit.get(params[:unit])
-  erb :show_single_schedule
-end
-
 get '/delete/schedules/:id' do
   @schedules = Schedule.get(params[:id])
   erb :delete_confirm
