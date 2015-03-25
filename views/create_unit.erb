@@ -1,0 +1,28 @@
+<div class="container">
+  <h2>Lagg till stuga</h2>
+  <form action="/new_unit" method="post" role="form" >
+    <div class="form-group">
+      <label for="Ids">Stuga</label>
+      <select class="form-control" id="id" name="id">
+        <% @units.each do |line| %>
+          <option value="<%= line.id %>"><%= line.id%></option>
+        <% end %>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="stuga">Stugnamn</label>
+      <input type="text" class="form-control" id="stuga" placeholder="Stugnamn" name="stuga">
+    </div>
+    <div class="form-group">
+      <label for="rooms">Antal rum</label>
+      <select class="form-control" id="rooms" name="room">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-info">Submit</button>
+    <input action="action" type="button" class="btn btn-md btn-warning" value="Avbryt" onclick="history.go(-1);">
+  </form>
+</div>
