@@ -52,3 +52,23 @@ get '/unit/:id' do
   erb :show_unit_schedule
 end
 
+get '/add_unit' do
+  @units = Unit.all(:unit => nil) 
+  erb :create_unit
+end
+
+post '/new_unit' do
+  unit = Unit.get(params[:id])
+  unit.update(
+    :unit	=> params[:stuga]
+  )
+  i = 1
+  num = params[:room].to_i
+  while i <= num  do
+  Unit.first(:id => params[:id]).rooms.create(
+    :room	=> i
+  )
+  i += 1
+  end
+redirect '/'
+end

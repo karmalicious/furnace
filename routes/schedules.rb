@@ -1,6 +1,6 @@
 # encoding: utf-8
 get '/' do
-  @schedules = Unit.all.schedules.all(:order => [ :unit_id.asc, :start.asc ])
+  @schedules = Unit.all.rooms.all(:order => :unit_id.asc).schedules.all(:order => :start.asc )
   erb :show_schedules
 end
 

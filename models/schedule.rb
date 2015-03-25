@@ -26,7 +26,7 @@ end
 class Schedule
   include DataMapper::Resource
   
-  has n, :rooms 	
+  belongs_to :room
 
   property :id,         Serial
   property :title,      String
