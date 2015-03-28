@@ -41,15 +41,11 @@ delete '/api/units/:id' do
   halt 500 unless unit.destroy
 end
 
-get '/units' do
-  @units = Unit.all
-  erb :test
-end
-
 get '/unit/:id' do
-  @schedules = Unit.get(params[:id]).schedules.all(:order => :start.asc )
+  @schedules = Unit.get(params[:id]).rooms.all.schedules.all(:order => :start.asc )
   @title =  Unit.get(params[:id]).unit.capitalize
-  erb :show_unit_schedule
+  @rooms = Unit.get(params[:id]).rooms.all
+  erb :show_unit
 end
 
 get '/add_unit' do

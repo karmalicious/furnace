@@ -1,20 +1,25 @@
 # encoding: utf-8
 get '/' do
-  @schedules = Unit.all.rooms.all(:order => :unit_id.asc).schedules.all(:order => :start.asc )
+  @units = Unit.all(:unit.not => nil, :order => [ :unit ])
+  @schedules = Unit.all(:order => :unit.asc).rooms.all(:order => :room).schedules.all(:order => :start.asc )
   erb :show_schedules
 end
 
-get '/form' do
-  @units = Unit.all(:unit.not => nil)
+post '/form' do
+  @rooms = Unit.get(params[:id]).rooms
+  @unit = Unit.get(params[:id]).unit
   erb :create_schedule
 end
 
 post '/new' do
-  Unit.first(:unit => params[:unit]).schedules.create(
-    :start	=> params[:start],
-    :stop	=> params[:stop],
-    :updated_at	=> DateTime.now
-  )
+  rooms = params[:room]
+  rooms.each do |moo|
+    Unit.first(:unit => params[:unit]).rooms.first(:room => moo).schedules.create(
+      :start		=> params[:start],
+      :stop		=> params[:stop],
+      :updated_at	=> DateTime.now
+    )
+  end
   redirect '/'
 end
 

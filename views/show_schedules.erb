@@ -2,22 +2,34 @@
   <h2>Schemalagda Stugor</h2>
   <p>Schemalagda tider f&ouml;r stugors p&aring;- och avslagning av el</p>
   <p>Klicka p&aring; ett schema f&ouml;r att redigera det. Klicka p&aring; ett stugnamn f&ouml;r att se stugans scheman</p>
-  <a href="/form" class="btn btn-info btn-md">L&auml;gg till schema</a>            
   <a href="/add_unit" class="btn btn-info btn-md">L&auml;gg till stuga</a>            
+  <form action="/form" method="post" role="form" >
+    <div class="form-group">
+      <label for="Units"></label>
+      <select class="form-control" id="units" name="id" onchange="this.form.submit()">
+        <option>Skapa schema f&ouml;r stuga</option>
+        <% @units.each do |line| %>
+          <option value="<%= line.id %>"><%= line.unit%></option>
+        <% end %>
+      </select>
+    </div>
+  </form>
   <table class="table table-striped">
     <thead>
       <tr>
         <th>Schema Start</th>
         <th>Schema Stopp</th>
         <th>Stuga</th>
+	<th>Rum</th>
       </tr>
     </thead>
     <tbody>
       <% @schedules.each do |schedule| %>
-        <tr class='clickable-row' data-href='/schedules/<%= schedule.id %>/<%= schedule.unit_id %>'>
+        <tr class='clickable-row' data-href='/schedules/<%= schedule.id %>'>
           <td><%= schedule.start.strftime("%Y-%m-%d %H:%M") %></td>
           <td><%= schedule.stop.strftime("%Y-%m-%d %H:%M") %></td>
-          <td><a href="/unit/<%= schedule.unit.id %>"><%= schedule.unit.unit %></a></td>
+          <td><a href="/unit/<%= schedule.room.unit.id %>"><%= schedule.room.unit.unit %></a></td>
+          <td><%= schedule.room.room%></td>
         </tr>
       <% end %>
     </tbody>

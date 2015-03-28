@@ -29,7 +29,6 @@ class Schedule
   belongs_to :room
 
   property :id,         Serial
-  property :title,      String
   property :start,	DateTime
   property :stop,   	DateTime
   property :updated_at, DateTime

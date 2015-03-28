@@ -3,7 +3,7 @@
   <form action="/new_unit" method="post" role="form" >
     <div class="form-group">
       <label for="Ids">Stuga</label>
-      <select class="form-control" id="id" name="id">
+      <select class="form-control" id="id" name="id" required >
         <% @units.each do |line| %>
           <option value="<%= line.id %>"><%= line.id%></option>
         <% end %>
