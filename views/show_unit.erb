@@ -1,0 +1,49 @@
+<div class="container">
+  <h2><%= @title %></h2>
+  <p>Schemalagda tider f&ouml;r stugans p&aring;- och avslagning av el</p>
+  <a href="/" class="btn btn-md btn-warning" role="button">Tillbaka</a>
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th>Rum</th>
+        <th>Rel&auml; Status</th>
+        <th>Temperatur</th>
+        <th>Uppdaterad</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @roomdata.each do |line| %>
+        <tr>
+          <td><%= line.room.room %></td>
+          <% if line.relay_status == "ON" %>
+            <td><button type="button" class="btn btn-sm btn-success"><%= line.relay_status%></button></td>
+          <% else %>
+            <td><button type="button" class="btn btn-sm btn-danger"><%= line.relay_status%></button></td>
+          <% end %>
+          <td><%= line.temp %></td>        
+          <td><%= line.updated_at.strftime("%Y-%m-%d %H:%M") %></td>        
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th>Schema Start</th>
+        <th>Schema Stopp</th>
+        <th>Rum</th>
+        <th>Radera schema</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @schedules.each do |schedule| %>
+        <tr>
+          <td><%= schedule.start.strftime("%Y-%m-%d %H:%M") %></td>
+          <td><%= schedule.stop.strftime("%Y-%m-%d %H:%M") %></td>
+          <td><%= schedule.room %></td>
+          <td><a href="/delete/schedules/<%= schedule.id %>" class="btn-sm btn-danger" role="button">RADERA SCHEMA</a></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
