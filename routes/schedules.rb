@@ -5,7 +5,7 @@ get '/' do
 end
 
 get '/form' do
-  @units = Unit.all
+  @units = Unit.all(:unit.not => nil)
   erb :create_schedule
 end
 
@@ -13,7 +13,6 @@ post '/new' do
   Unit.first(:unit => params[:unit]).schedules.create(
     :start	=> params[:start],
     :stop	=> params[:stop],
-    :title	=> params[:title],
     :updated_at	=> DateTime.now
   )
   redirect '/'
