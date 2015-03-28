@@ -42,9 +42,11 @@ delete '/api/units/:id' do
 end
 
 get '/unit/:id' do
-  @schedules = Unit.get(params[:id]).rooms.all.schedules.all(:order => :start.asc )
+  id = params[:id]
+  @schedules = repository(:default).adapter.select("SELECT GROUP_CONCAT(schedules.id) AS id,schedules.start,schedules.stop,schedules.updated_at,schedules.room_id, GROUP_CONCAT(rooms.room ORDER BY rooms.room) AS room FROM schedules INNER JOIN rooms ON schedules.room_id = rooms.id INNER JOIN units ON units.id = rooms.unit_id WHERE units.id = '#{id}' GROUP BY start,stop")
   @title =  Unit.get(params[:id]).unit.capitalize
   @rooms = Unit.get(params[:id]).rooms.all
+  @roomdata = Unit.get(params[:id]).rooms.all(:order => :room).roomdata.all
   erb :show_unit
 end
 

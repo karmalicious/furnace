@@ -28,8 +28,8 @@
         <tr class='clickable-row' data-href='/schedules/<%= schedule.id %>'>
           <td><%= schedule.start.strftime("%Y-%m-%d %H:%M") %></td>
           <td><%= schedule.stop.strftime("%Y-%m-%d %H:%M") %></td>
-          <td><a href="/unit/<%= schedule.room.unit.id %>"><%= schedule.room.unit.unit %></a></td>
-          <td><%= schedule.room.room%></td>
+          <td><a href="/unit/<%= schedule.id %>"><%= schedule.unit %></a></td>
+          <td><%= schedule.room%></td>
         </tr>
       <% end %>
     </tbody>

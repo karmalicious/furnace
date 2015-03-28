@@ -1,7 +1,7 @@
 # encoding: utf-8
 get '/' do
   @units = Unit.all(:unit.not => nil, :order => [ :unit ])
-  @schedules = Unit.all(:order => :unit.asc).rooms.all(:order => :room).schedules.all(:order => :start.asc )
+  @schedules = repository(:default).adapter.select("SELECT GROUP_CONCAT(schedules.id) AS id,schedules.start,schedules.stop,schedules.updated_at,schedules.room_id, GROUP_CONCAT(rooms.room ORDER BY rooms.room) AS room, units.id, units.unit FROM schedules INNER JOIN rooms ON schedules.room_id = rooms.id INNER JOIN units ON units.id = rooms.unit_id GROUP BY start,stop ORDER BY unit")
   erb :show_schedules
 end
 
@@ -24,16 +24,17 @@ post '/new' do
 end
 
 get '/delete/schedules/:id' do
-  @schedules = Schedule.get(params[:id])
+  @schedules = params[:id]
   erb :delete_confirm
 end
 
-get '/delete/schedules/:id/:confirmed/:unit_id' do
-  schedule = Schedule.get(params[:id])
-  if params[:confirmed] = "ConfirmedDelete"
+get '/delete_confirmed/schedules/:id' do
+  id = params[:id].split(",")
+  id.each do |line|
+    schedule = Schedule.get(line)
     schedule.destroy
   end
-  redirect "/unit/#{params[:unit_id]}"
+  redirect "/"
 end
 
 get '/api/schedules' do

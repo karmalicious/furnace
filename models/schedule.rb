@@ -15,8 +15,7 @@ class Room
 
   belongs_to :unit
 
-  has 1, :relay
-  has 1, :temp
+  has 1, :roomdata
   has n, :schedules
   
   property :id,         Serial
@@ -34,23 +33,13 @@ class Schedule
   property :updated_at, DateTime
 end 
 
-class Relay
+class Roomdata
   include DataMapper::Resource
 
   belongs_to :room
 
   property :id,         	Serial
   property :relay_status,	String
+  property :temp,		Float
   property :updated_at, 	DateTime
 end
-
-class Temp
-  include DataMapper::Resource
-
-  belongs_to :room
-
-  property :id,         Serial
-  property :temp,	Float
-  property :updated_at, DateTime
-end
-
