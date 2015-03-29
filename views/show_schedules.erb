@@ -5,8 +5,8 @@
   <a href="/admin" class="btn btn-info btn-md">Administrera</a>
   <form action="/form" method="post" role="form" >
     <div class="form-group">
-      <label for="Units"></label>
-      <select class="form-control" id="units" name="id" onchange="this.form.submit()">
+      <label for="Units-1"></label>
+      <select class="form-control" id="units-1" name="id" onchange="this.form.submit()">
         <option>Skapa schema f&ouml;r stuga</option>
         <% @units.each do |line| %>
           <option value="<%= line.id %>"><%= line.unit%></option>
@@ -14,6 +14,13 @@
       </select>
     </div>
   </form>
+  <label for="Units-2"></label>
+  <select class="form-control" id="units-2" name="id" onchange="location = this.options[this.selectedIndex].value;">
+    <option>G&aring; till stuga</option>
+    <% @units.each do |line| %>
+      <option value="/unit/<%= line.id %>"><%= line.unit%></option>
+    <% end %>
+  </select>
   <table class="table table-striped">
     <thead>
       <tr>
