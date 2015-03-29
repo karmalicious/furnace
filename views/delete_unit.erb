@@ -1,0 +1,15 @@
+<div class="container">
+  <h2>Lagg till stuga</h2>
+  <form action="/delete/unit" method="post" role="form" >
+    <div class="form-group">
+      <label for="Ids">Stuga</label>
+      <select class="form-control" id="id" name="id" required >
+        <% @units.each do |line| %>
+          <option value="<%= line.id %>"><%= line.unit%></option>
+        <% end %>
+      </select>
+    </div>
+    <input action="action" type="button" class="btn btn-md btn-warning" value="Avbryt" onclick="history.go(-1);">
+    <button type="submit" class="btn btn-danger btn-md">RADERA</button>
+  </form>
+</div>

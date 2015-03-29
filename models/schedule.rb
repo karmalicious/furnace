@@ -1,7 +1,7 @@
 class Unit
   include DataMapper::Resource
-
-  has n, :rooms
+  
+  has n, :rooms, :constraint => :destroy
 
   property :id,         Serial
   property :unit,       String
@@ -15,8 +15,8 @@ class Room
 
   belongs_to :unit
 
-  has 1, :roomdata
-  has n, :schedules
+  has 1, :roomdata, :constraint => :destroy
+  has n, :schedules, :constraint => :destroy
   
   property :id,         Serial
   property :room,       String

@@ -1,4 +1,6 @@
+require 'dm-constraints'
 require 'dm-migrations'
+
 
 desc "List all routes for this application"
 task :routes do

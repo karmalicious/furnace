@@ -25,7 +25,7 @@ end
 
 get '/delete/schedules/:id' do
   @schedules = params[:id]
-  erb :delete_confirm
+  erb :delete_schedule_confirm
 end
 
 get '/delete_confirmed/schedules/:id' do

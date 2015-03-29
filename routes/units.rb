@@ -70,3 +70,23 @@ post '/new_unit' do
   end
 redirect '/'
 end
+
+get '/delete_unit' do
+  @units = Unit.all(:unit.not => nil)
+  erb :delete_unit
+end
+
+post '/delete/unit' do
+  @unit = Unit.get(params[:id])
+  erb :delete_unit_confirm
+end
+
+get '/delete_confirmed/unit/:id' do
+  unit = Unit.get(params[:id])
+  unit.destroy
+  redirect "/"
+end
+
+get '/admin' do
+  erb :admin
+end
