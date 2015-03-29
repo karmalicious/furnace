@@ -1,12 +1,3 @@
-get '/api/units' do
-  format_response(Unit.all, request.accept)
-end
-
-get '/api/units/:id' do
-  unit ||= Unit.get(params[:id]) || halt(404)
-  format_response(unit, request.accept)
-end
-
 get '/api/units/:unit' do
   unit ||= Unit.all(:unit => params[:unit]) || halt(404)
   format_response(unit, request.accept)
@@ -15,30 +6,12 @@ end
 post '/api/units' do
   body = JSON.parse request.body.read
   unit = Unit.first_or_create({:unit => body['unit']}).update(
-    unit:	body['unit'],
     ip:		body['ip'],
     mac:	body['mac'],
     version:	body['version']
   )
   status 201
   format_response(unit, request.accept)
-end
-
-put '/api/units/:id' do
-  body = JSON.parse request.body.read
-  unit ||= Unit.get(params[:id]) || halt(404)
-  halt 500 unless unit.update(
-    unit:	body['unit'],
-    ip:		body['ip'],
-    mac:	body['mac'],
-    version:	body['version']
-  )
-  format_response(unit, request.accept)
-end
-
-delete '/api/units/:id' do
-  unit ||= Unit.get(params[:id]) || halt(404)
-  halt 500 unless unit.destroy
 end
 
 get '/unit/:id' do
