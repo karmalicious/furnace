@@ -38,6 +38,6 @@ get '/delete_confirmed/schedules/:id' do
 end
 
 get '/api/schedules/unit/:unit' do
-  schedule ||= Unit.first(:unit => params[:unit]).schedules.all || halt(404)
+  schedule ||= Unit.first(:unit => params[:unit]).rooms.schedules || halt(404)
   format_response(schedule, request.accept)
 end

@@ -1,17 +1,27 @@
-get '/api/units/:unit' do
-  unit ||= Unit.all(:unit => params[:unit]) || halt(404)
+get '/api/units' do
+  unit ||= Unit.all || halt(404) #(:unit => params[:unit]) || halt(404)
   format_response(unit, request.accept)
 end
 
 post '/api/units' do
   body = JSON.parse request.body.read
-  unit = Unit.first_or_create({:unit => body['unit']}).update(
+  unit = Unit.first_or_create({:mac => body['mac']}).update(
     ip:		body['ip'],
     mac:	body['mac'],
     version:	body['version']
   )
   status 201
   format_response(unit, request.accept)
+end
+
+get '/api/units/data/:mac' do
+  hostname ||= Unit.first(:mac => params[:mac]).unit || halt(404)
+  format_response(hostname, request.accept)
+end
+
+get '/api/units/rooms/:mac' do
+  rooms ||= Unit.first(:mac => params[:mac]).rooms.count || halt(404)
+  format_response(rooms, request.accept)
 end
 
 get '/unit/:id' do
