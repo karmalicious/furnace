@@ -38,7 +38,7 @@
     <% end %>
     <input type="hidden" value="<%= @unit %>" name="unit" />
     <input type="submit" class="btn btn-md btn-info" value="Spara">
-    <input action="action" type="button" class="btn btn-md btn-warning" value="Avbryt" onclick="history.go(-1);">
+    <input action="action" type="button" class="btn btn-md btn-warning" value="Avbryt" onclick="location.href = document.referrer;">
   </form>
 </div>
 <script>
