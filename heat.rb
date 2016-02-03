@@ -2,7 +2,6 @@ require 'json'
 require 'sinatra'
 require 'data_mapper'
 require 'dm-migrations'
-
 require './environment'
 
 set :bind, '0.0.0.0'

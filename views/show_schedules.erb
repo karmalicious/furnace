@@ -7,7 +7,7 @@
     <div class="form-group">
       <label for="Units-1"></label>
       <select class="form-control" id="units-1" name="id" onchange="this.form.submit()">
-        <option>Skapa schema f&ouml;r stuga</option>
+        <option selected>Skapa schema f&ouml;r stuga</option>
         <% @units.each do |line| %>
           <option value="<%= line.id %>"><%= line.unit%></option>
         <% end %>
@@ -21,7 +21,7 @@
       <option value="/unit/<%= line.id %>"><%= line.unit%></option>
     <% end %>
   </select>
-  <table class="table table-striped">
+  <table class="table">
     <thead>
       <tr>
         <th>Schema Start</th>
@@ -31,8 +31,16 @@
       </tr>
     </thead>
     <tbody>
-      <% @schedules.each do |schedule| %>
-        <tr class='clickable-row' data-href='/schedules/<%= schedule.id %>'>
+      <% @active_schedules.each do |schedule| %>
+        <tr class="success" data-href='/schedules/<%= schedule.id %>'>
+          <td><%= schedule.start.strftime("%Y-%m-%d %H:%M") %></td>
+          <td><%= schedule.stop.strftime("%Y-%m-%d %H:%M") %></td>
+          <td><a href="/unit/<%= schedule.id %>"><%= schedule.unit %></a></td>
+          <td><%= schedule.room%></td>
+        </tr>
+      <% end %>
+      <% @upcoming_schedules.each do |schedule| %>
+        <tr class="info" data-href='/schedules/<%= schedule.id %>'>
           <td><%= schedule.start.strftime("%Y-%m-%d %H:%M") %></td>
           <td><%= schedule.stop.strftime("%Y-%m-%d %H:%M") %></td>
           <td><a href="/unit/<%= schedule.id %>"><%= schedule.unit %></a></td>
