@@ -5,6 +5,7 @@ class Village
 
   property :id,		Serial
   property :village,	String
+end
 
 class Unit
   include DataMapper::Resource
