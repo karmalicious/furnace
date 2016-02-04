@@ -5,10 +5,10 @@ end
 
 post '/api/units' do
   body = JSON.parse request.body.read
-  unit = Unit.first_or_create({:mac => body['mac']}).update(
+  unit = Village.first_or_create( :village => '666').units.first_or_create({:mac => body['mac']}).update(
     ip:		body['ip'],
     mac:	body['mac'],
-    version:	body['version']
+    version:	body['version'],
   )
   status 201
   format_response(unit, request.accept)
@@ -46,8 +46,8 @@ post '/new_unit' do
   i = 1
   num = params[:room].to_i
   while i <= num  do
-  Unit.first(:id => params[:id]).rooms.create(
-    :room	=> i
+    Unit.first(:id => params[:id]).rooms.create(
+      :room	=> i
   )
   i += 1
   end

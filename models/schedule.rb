@@ -4,13 +4,13 @@ class Village
   has n, :units, :constraint => :destroy
 
   property :id,		Serial
-  property :village,	String
+  property :village,	String, :default => 666
 end
 
 class Unit
   include DataMapper::Resource
 
-  belongs_to :village
+#  belongs_to :village
 
   has n, :rooms, :constraint => :destroy
 
