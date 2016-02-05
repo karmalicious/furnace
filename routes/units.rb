@@ -5,7 +5,7 @@ end
 
 post '/api/units' do
   body = JSON.parse request.body.read
-  unit = Village.first_or_create( :village => '666').units.first_or_create({:mac => body['mac']}).update(
+  unit = Village.first_or_create( :village => 'Ogrupperade').units.first_or_create({:mac => body['mac']}).update(
     ip:		body['ip'],
     mac:	body['mac'],
     version:	body['version'],
@@ -38,6 +38,10 @@ get '/add_unit' do
   erb :create_unit
 end
 
+get '/add_village' do
+  erb :add_village
+end
+
 post '/new_unit' do
   unit = Unit.get(params[:id])
   unit.update(
@@ -48,10 +52,17 @@ post '/new_unit' do
   while i <= num  do
     Unit.first(:id => params[:id]).rooms.create(
       :room	=> i
-  )
-  i += 1
+    )
+    i += 1
   end
-redirect '/'
+  redirect '/'
+end
+
+post '/new_village' do
+  Village.first_or_create(
+    :village	=> params[:village]
+  )
+  redirect '/'
 end
 
 get '/delete_unit' do
