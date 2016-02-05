@@ -1,5 +1,5 @@
 get '/api/units' do
-  unit ||= Unit.all || halt(404) #(:unit => params[:unit]) || halt(404)
+  unit ||= Unit.all || halt(404) 
   format_response(unit, request.accept)
 end
 
@@ -35,6 +35,7 @@ end
 
 get '/add_unit' do
   @units = Unit.all(:unit => nil) 
+  @villages = Village.all(:order => :village)
   erb :create_unit
 end
 
@@ -43,9 +44,10 @@ get '/add_village' do
 end
 
 post '/new_unit' do
-  unit = Unit.get(params[:id])
-  unit.update(
-    :unit	=> params[:stuga]
+  #Village.first(:id => params[:village]).units.first(params[:id]).update(
+  Unit.first(params[:id]).update(
+    :unit	=> params[:stuga],
+    :village_id	=> params[:village],
   )
   i = 1
   num = params[:room].to_i
@@ -57,6 +59,21 @@ post '/new_unit' do
   end
   redirect '/'
 end
+#post '/new_unit' do
+#  unit = Unit.get(params[:id])
+#  unit.update(
+#    :unit	=> params[:stuga]
+#  )
+#  i = 1
+#  num = params[:room].to_i
+#  while i <= num  do
+#    Unit.first(:id => params[:id]).rooms.create(
+#      :room	=> i
+#    )
+#    i += 1
+#  end
+#  redirect '/'
+#end
 
 post '/new_village' do
   Village.first_or_create(

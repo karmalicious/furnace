@@ -1,16 +1,16 @@
 class Village
   include DataMapper::Resource
   
-  has n, :units, :constraint => :destroy
+  has n, :units, :constraint => :skip
 
   property :id,		Serial
-  property :village,	String, :default => 666
+  property :village,	String
 end
 
 class Unit
   include DataMapper::Resource
 
-#  belongs_to :village
+  belongs_to :village
 
   has n, :rooms, :constraint => :destroy
 

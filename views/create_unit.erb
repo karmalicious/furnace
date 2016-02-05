@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Lagg till stuga</h2>
+  <h2>L&auml;gg till stuga</h2>
   <form action="/new_unit" method="post" role="form" >
     <div class="form-group">
       <label for="Ids">Stuga</label>
@@ -20,6 +20,14 @@
         <option value="2">2</option>
         <option value="3">3</option>
         <option value="4">4</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="village">Stugby</label>
+      <select class="form-control" id="village" name="village" required >
+        <% @villages.each do |line| %>
+          <option value="<%= line.id %>"><%= line.village%></option>
+        <% end %>
       </select>
     </div>
     <input action="action" type="button" class="btn btn-md btn-warning" value="Avbryt" onclick="history.go(-1);">
