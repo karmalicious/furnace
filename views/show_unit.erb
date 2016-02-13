@@ -12,10 +12,10 @@
       </tr>
     </thead>
     <tbody>
-      <% @roomdata.each do |line| %>
+      <% @rooms.each do |line| %>
         <tr>
-          <td><%= line.room.room %></td>
-          <% if line.relay_status == "ON" %>
+          <td><%= line.room %></td>
+          <% if line.relay_status == "0" %>
             <td><button type="button" class="btn btn-sm btn-success"><%= line.relay_status%></button></td>
           <% else %>
             <td><button type="button" class="btn btn-sm btn-danger"><%= line.relay_status%></button></td>

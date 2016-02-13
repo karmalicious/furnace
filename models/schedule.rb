@@ -26,11 +26,13 @@ class Room
 
   belongs_to :unit
 
-  has 1, :roomdata, :constraint => :destroy
   has n, :schedules, :constraint => :destroy
   
   property :id,         Serial
   property :room,       String
+  property :relay_status,	String
+  property :temp,		Float
+  property :updated_at, 	DateTime
 end
 
 class Schedule
@@ -43,14 +45,3 @@ class Schedule
   property :stop,   	DateTime
   property :updated_at, DateTime
 end 
-
-class Roomdata
-  include DataMapper::Resource
-
-  belongs_to :room
-
-  property :id,         	Serial
-  property :relay_status,	String
-  property :temp,		Float
-  property :updated_at, 	DateTime
-end
